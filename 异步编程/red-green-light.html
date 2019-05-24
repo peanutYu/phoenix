@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>红绿灯</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #light {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin: 120px auto;
+  }
+</style>
+<body>
+  <!-- 把一个圆形div按绿色3秒，黄色1秒，红色2s循环变换背景颜色 -->
+  <div id="light"></div>
+  <script>
+    var light = document.getElementById('light');
+
+    function changeColor(el, color, duration) {
+      return new Promise((resolve, reject) => {
+        el.style.backgroundColor = color;
+        setTimeout(resolve, duration);
+      })
+    }
+
+    async function main() {
+      await changeColor(light, 'green', 3000);  
+      await changeColor(light, 'yellow', 1000);  
+      await changeColor(light, 'red', 2000);
+      main();
+    }
+
+    main();
+  </script>
+</body>
+</html>

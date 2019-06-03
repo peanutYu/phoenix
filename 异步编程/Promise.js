@@ -6,8 +6,11 @@ const isFunction = x => typeof x === 'function'
 
 class MyPromise {
   constructor(fn) {
+    if (!isFunction(fn)) {
+      throw new Error('MyPromise must accept a function as a parameter')
+    }
     this._status = PENDING;
-    this._value = null;
+    this._value = undefined;
     // this.deffered = [];
     this._onFulFilledQueues = [];
     this._onRejectedQueues = [];
@@ -144,7 +147,9 @@ class MyPromise {
 }
 
 const myPromise1 = new MyPromise((resolve, reject) => {
-  resolve('my Promise1');
+  setTimeout(() => {
+    resolve('my Promise1');
+  }, 3000);
 });
 
 const myPromise2 = new MyPromise((resolve, reject) => {
@@ -156,6 +161,8 @@ const myPromise2 = new MyPromise((resolve, reject) => {
 
 MyPromise.all([myPromise1, myPromise2]).then(data => console.log(data));
 
-MyPromise.resolve(myPromise1).then(data => console.log(data));
+MyPromise.race([myPromise1, myPromise2]).then(data => console.log(data));
 
-MyPromise.reject(myPromise2).catch(data => console.log(data));
+// MyPromise.resolve(myPromise1).then(data => console.log(data));
+
+// MyPromise.reject(myPromise2).catch(data => console.log(data));

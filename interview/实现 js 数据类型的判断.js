@@ -3,7 +3,7 @@
 
 
 function type (obj) {
-  return Object.prototype.toString.call(obj).slice(8, -1);
+  return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 }
 
 console.log(type(new Date()));
@@ -12,3 +12,5 @@ console.log(type(new Array(5).fill(4)));
 console.log(type(new Number(10)));
 console.log(type(new Object));
 console.log(type(Symbol()));
+console.log(type(null));
+console.log(type(undefined));

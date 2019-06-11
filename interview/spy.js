@@ -1,3 +1,5 @@
+// 国家有重要的任务要托付给你：完成间谍函数 spy，它可以潜伏到任何一个函数当中，监听它们的所有活动。spy 接受一个函数作为参数，返回一个被间谍潜伏以后的函数。
+
 const spy = function(fn) {
   var calls = [];
   var f = function() {

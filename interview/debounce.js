@@ -1,4 +1,4 @@
-const debounce = (fn, duration) => {
+const myDebounce = (fn, duration) => {
   let timer = null;
   return function() {
     clearTimeout(timer);

@@ -3,9 +3,12 @@ function _new () {
   if (constructor.constructor !== Function) {
     throw new Error('the first argument must be a function');
   }
-  const o = Object.create(null);
+  const o = {};
   o.__proto__ = constructor.prototype;
-  constructor.apply(o, args);
+  const result = constructor.apply(o, args);
+  if (result && (typeof result === 'object' || typeof result === 'function')) {
+    return result;
+  }
   return o;
 };
 
@@ -13,11 +16,16 @@ function _new () {
 function Dog(name, age) {
   this.name = name;
   this.age = age;
-  this.say = function() {
-    console.log(`name: ${this.name}`);
-  }
+}
+
+Dog.prototype.say = function() {
+  console.log(`name: ${this.name}`);
 }
 
 const dog = _new(Dog, '小黄', 18);
 console.log(dog);
 dog.say();
+
+const dog2 = new Dog('小红', 16);
+console.log(dog2);
+dog2.say();

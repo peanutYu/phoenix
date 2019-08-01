@@ -1,14 +1,9 @@
 const myThrottle = (fn, wait) => {
-  let timer = null;
+  let last = 0;
   return function() {
     const now = Date().now();
-    if (!timer) {
-      timer = now;
-      fn.apply(this, arguments);
-      return;
-    }
-    if (now - timer > wait) {
-      timer = now;
+    if (now - last >= wait) {
+      last = now;
       fn.apply(this, arguments);
     }
   }

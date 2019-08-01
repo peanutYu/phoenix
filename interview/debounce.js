@@ -1,9 +1,12 @@
-const myDebounce = (fn, duration) => {
+const myDebounce = (fn, delay) => {
   let timer = null;
   return function() {
-    clearTimeout(timer);
+    const context = this;
+    if (timer) {
+      clearTimeout(timer);
+    }
     timer = setTimeout(function() {
-      fn();
-    }, duration);
+      fn.apply(context, arguments);
+    }, delay);
   }
 }

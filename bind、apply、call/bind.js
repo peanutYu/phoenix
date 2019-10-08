@@ -17,6 +17,7 @@ var b = {
 }
 
 a.say.bind(b, '小花', new Date())();
+a.say.bind(b)('小红', new Date());
 
 const toStr = Function.prototype.call.MyBind(Object.prototype.toString);
 
